@@ -1,0 +1,757 @@
+   * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ========== CSS Variables ========== */
+:root {
+    --primary-green: #60a14c;
+    --light-green: #8fb896;
+    --dark-green: #4a7a56;
+    --bg-light: #f5f7f6;
+    --bg-white: #ffffff;
+    --text-dark: #2d3436;
+    --text-gray: #636e72;
+    --text-light: #b2bec3;
+    --border-color: #dfe6e9;
+    --shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    --shadow-hover: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* ========== Body Styles ========== */
+body {
+    font-family: 'Cairo', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* ========================================
+   ========== Start Header Section ==========
+   ======================================== */
+
+.header-top {
+    background-color: var(--bg-white);
+    padding: 1rem 2rem;
+    box-shadow: var(--shadow);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    margin-right: 260px;
+}
+
+/* ========== Logo Styles ========== */
+.logo {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    text-align: center;
+    margin-top: 20px; 
+  }
+  
+  .logo-circle {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--primary-green), var(--light-green));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.3rem;
+    font-weight: 700;
+    box-shadow: 0 4px 10px rgba(90, 147, 103, 0.3);
+    transition: transform 0.3s ease;
+  }
+  
+  .logo-circle:hover {
+    transform: scale(1.05);
+  }
+  
+  .user-info {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .user-info .user-name {
+    font-size: 16px;
+    font-weight: 700;
+    color:#1e723e;
+    margin: 0;
+  }
+  
+/* ========== Navigation Menu ========== */
+.main-nav {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    
+}
+
+.nav-list {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-item {
+    position: relative;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--text-gray);
+    font-weight: 600;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.nav-link i {
+    font-size: 1.2rem;
+    color: var(--primary-green);
+}
+
+.nav-link:hover {
+    background-color: rgba(90, 147, 103, 0.1);
+    color: var(--primary-green);
+}
+
+.nav-item.active .nav-link {
+    color: var(--primary-green);
+    background-color: rgba(90, 147, 103, 0.1);
+}
+
+/* ========== Login Section ========== */
+.login-section {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.welcome-text {
+    color: var(--text-gray);
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.login-link {
+    color: #598548;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.login-link:hover {
+    color: #9bcd88;
+}
+
+.btn-login {
+  background: linear-gradient(to right, #b5d38f, #95cc87);
+    color: white;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(143, 184, 150, 0.3);
+}
+
+.btn-login:hover {
+    background: #7da785;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(143, 184, 150, 0.4);
+}
+
+/* ========================================
+   ========== End Header Section ==========
+   ======================================== */
+
+
+/* ========================================
+   ========== Start Main Wrapper ==========
+   ======================================== */
+
+.main-wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ========================================
+   ========== Start Sidebar Section ==========
+   ======================================== */
+
+.sidebar {
+    width: 260px;
+    background-color: var(--bg-white);
+    padding: 1.5rem 0.8rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 100;
+}
+
+/* ========== User Info ========== */
+.user-info {
+    text-align: center;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 1rem;
+}
+
+.user-name {
+    color: var(--text-dark);
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+/* ========== Sidebar Navigation ========== */
+.sidebar-nav {
+    flex: 1;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-item {
+    margin-bottom: 0.3rem;
+}
+
+.menu-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.7rem 1rem;
+    color: var(--text-gray);
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.menu-link i {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    transition: color 0.3s ease;
+    min-width: 20px;
+}
+
+.menu-link:hover {
+    background-color: rgba(90, 147, 103, 0.1);
+    color: var(--primary-green);
+}
+
+.menu-link:hover i {
+    color: var(--primary-green);
+}
+
+.menu-item.active .menu-link {
+    background: linear-gradient(135deg, var(--primary-green), var(--light-green));
+    color: white;
+}
+
+.menu-item.active .menu-link i {
+    color: white;
+}
+
+/* ========== Sidebar Footer ========== */
+.sidebar-footer {
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.logout-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.7rem 1rem;
+    color: #e74c3c;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.logout-link i {
+    font-size: 1.1rem;
+    min-width: 20px;
+}
+
+.logout-link:hover {
+    background-color: rgba(231, 76, 60, 0.1);
+}
+
+/* ========================================
+   ========== End Sidebar Section ==========
+   ======================================== */
+
+
+/* ========================================
+   ========== Start Content Area ==========
+   ======================================== */
+
+.content-area {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+    margin-right: 260px;
+    margin-top: 90px;
+}
+
+.section-title {
+    color:#4fa837;
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin-bottom: 1.2rem;
+    padding-right: 10px;
+    text-align: right;
+}
+
+/* ========================================
+   ========== Start Welcome Section ==========
+   ======================================== */
+
+.welcome-section {
+    margin-bottom: 3rem;
+}
+
+/* ========== Statistics Cards ========== */
+.stat-card {
+    background-color: var(--bg-white);
+    border-radius: 12px;
+    padding: 1.3rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+}
+
+.stat-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--primary-green), var(--light-green));
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.stat-content {
+    flex: 1;
+    text-align: right;
+}
+
+.stat-number {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin: 0;
+    line-height: 1;
+}
+
+.stat-label {
+    color: var(--text-gray);
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin: 0.4rem 0 0 0;
+}
+
+/* ========================================
+   ========== End Welcome Section ==========
+   ======================================== */
+
+
+/* ========================================
+   ========== Start Stores Section ==========
+   ======================================== */
+
+.stores-section {
+    margin-bottom: 3rem;
+}
+
+.store-card {
+    background-color: var(--bg-white);
+    border-radius: 12px;
+    padding: 1.3rem 1.5rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+}
+
+/* ========== Store Info ========== */
+.store-info {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.store-name {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.store-badge {
+    background: linear-gradient(135deg, var(--primary-green), var(--light-green));
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+/* ========== Store Actions ========== */
+.store-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn-visit {
+    background: linear-gradient(135deg, var(--primary-green), var(--light-green));
+    color: white;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-visit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(226, 239, 229, 0.3);
+    color: #def7d7;
+}
+
+.btn-dashboard {
+    background-color: transparent;
+    color: #4fa837;
+    border: 1.5px solid var(--primary-green);
+    padding: 0.6rem 1.5rem;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-dashboard:hover {
+    border-color: var(--primary-green);
+    color: var(--bg-light);
+    background: linear-gradient(to right, #365113, #95cc87);
+  }
+
+
+
+/* ========================================
+   ========== Start Orders Section ==========
+   ======================================== */
+
+.orders-section {
+    margin-bottom: 3rem;
+}
+
+/* ========== Orders Table ========== */
+.table-responsive {
+    background-color: var(--bg-white);
+    border-radius: 12px;
+    padding: 1.2rem;
+    box-shadow: var(--shadow);
+    overflow-x: auto;
+}
+
+.orders-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.orders-table thead {
+    background: linear-gradient(135deg, rgba(90, 147, 103, 0.08), rgba(143, 184, 150, 0.08));
+}
+
+.orders-table th {
+    padding: 0.9rem 1rem;
+    text-align: right;
+    font-weight: 600;
+    color: var(--primary-green);
+    font-size: 0.9rem;
+    border-bottom: 1.5px solid var(--border-color);
+}
+
+.orders-table td {
+    padding: 0.9rem 1rem;
+    text-align: right;
+    color: var(--text-gray);
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.orders-table tbody tr:hover {
+    background-color: rgba(90, 147, 103, 0.04);
+}
+
+.empty-state {
+    padding: 2.5rem !important;
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
+/* ========================================
+   ========== End Orders Section ==========
+   ======================================== */
+
+
+/* ========================================
+   ========== Start Responsive Design ==========
+   ======================================== */
+
+/* ========== Tablets (max-width: 992px) ========== */
+@media (max-width: 992px) {
+    .header-top {
+        padding: 1rem;
+    }
+    
+    .main-nav {
+        display: none;
+    }
+    
+    .sidebar {
+        width: 220px;
+    }
+    
+    .content-area {
+        padding: 1.5rem;
+    }
+    
+    .nav-list {
+        gap: 1rem;
+    }
+    
+    .stat-card {
+        padding: 1.5rem;
+    }
+}
+
+/* ========== Mobile (max-width: 768px) ========== */
+@media (max-width: 768px) {
+    .header-top {
+        margin-right: 0;
+    }
+    
+    .header-top .d-flex {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    
+    .main-wrapper {
+        flex-direction: column;
+    }
+    
+    .sidebar {
+        width: 100%;
+        position: relative;
+        top: 0;
+        height: auto;
+        border-radius: 0;
+    }
+    
+    .content-area {
+        padding: 1rem;
+        margin-right: 0;
+        margin-top: 0;
+    }
+    
+    .login-section {
+        order: -1;
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .welcome-text {
+        font-size: 0.85rem;
+    }
+    
+    .btn-login {
+        padding: 0.6rem 1.5rem;
+        font-size: 0.9rem;
+    }
+    
+    .section-title {
+        font-size: 1.4rem;
+    }
+    
+    .stat-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .stat-content {
+        text-align: center;
+    }
+    
+    .store-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .store-info {
+        flex-direction: column;
+    }
+    
+    .store-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+    
+    .btn-visit,
+    .btn-dashboard {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .orders-table {
+        font-size: 0.85rem;
+    }
+    
+    .orders-table th,
+    .orders-table td {
+        padding: 0.8rem;
+    }
+}
+
+/* ========== Small Mobile (max-width: 576px) ========== */
+@media (max-width: 576px) {
+    .logo-circle {
+        width: 50px;
+        height: 50px;
+        font-size: 1rem;
+    }
+    
+    .nav-list {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .stat-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
+    
+    .stat-label {
+        font-size: 1rem;
+    }
+}
+
+/* ========================================
+   ========== End Responsive Design ==========
+   ======================================== */
+
+
+/* ========================================
+   ========== Start Animations ==========
+   ======================================== */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.stat-card,
+.store-card,
+.table-responsive {
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* ========================================
+   ========== End Animations ==========
+   ======================================== */
+
+
+/* ========================================
+   ========== Start Utilities ==========
+   ======================================== */
+
+/* ========== Smooth Scrolling ========== */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ========== Custom Scrollbar ========== */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-light);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-green);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--dark-green);
+}
+
+/* ========================================
+   ========== End Utilities ==========
+   ======================================== */
+
