@@ -1,5 +1,60 @@
-
-   document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
+    
+    /* ========================================
+       ========== Start Mobile Sidebar Toggle ==========
+       ======================================== */
+    
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const sidebar = document.querySelector('.sidebar');
+    const sidebarClose = document.querySelector('.sidebar-close');
+    const sidebarOverlay = document.querySelector('.sidebar-overlay');
+    
+    // Open sidebar on mobile
+    if (mobileMenuToggle) {
+        mobileMenuToggle.addEventListener('click', function() {
+            sidebar.classList.add('active');
+            sidebarOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    }
+    
+    // Close sidebar when clicking close button
+    if (sidebarClose) {
+        sidebarClose.addEventListener('click', closeSidebar);
+    }
+    
+    // Close sidebar when clicking overlay
+    if (sidebarOverlay) {
+        sidebarOverlay.addEventListener('click', closeSidebar);
+    }
+    
+    // Function to close sidebar
+    function closeSidebar() {
+        sidebar.classList.remove('active');
+        sidebarOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    
+    // Close sidebar when clicking menu items on mobile
+    const menuLinks = document.querySelectorAll('.menu-link');
+    menuLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            if (window.innerWidth <= 768) {
+                closeSidebar();
+            }
+        });
+    });
+    
+    // Close sidebar on window resize if desktop
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+            closeSidebar();
+        }
+    });
+    
+    /* ========================================
+       ========== Start Navigation Link Animations ==========
+       ======================================== */
     
     const navLinks = document.querySelectorAll('.nav-link, .menu-link');
     
@@ -57,6 +112,7 @@
     document.querySelectorAll('.stat-card').forEach(card => {
         observer.observe(card);
     });
+    
     /* ========================================
        ========== Start Button Click Effects ==========
        ======================================== */
@@ -84,6 +140,7 @@
             }, 600);
         });
     });
+    
     /* ========================================
        ========== Start Sidebar Menu Active State ==========
        ======================================== */
@@ -116,6 +173,7 @@
         dashboardButton.addEventListener('click', function() {
             // Simulate dashboard login
             console.log('سجل دخول لصفحة التحكم');
+            showNotification('جاري تسجيل الدخول...', 'info');
         });
     }
  
@@ -152,53 +210,6 @@
         }, 3000);
     }
   
-    /* ========================================
-       ========== Start Responsive Menu Toggle ==========
-       ======================================== */
-    
-    const createMobileMenu = () => {
-        if (window.innerWidth <= 992) {
-            const header = document.querySelector('.header-top');
-            const mainNav = document.querySelector('.main-nav');
-            
-            if (!document.querySelector('.menu-toggle')) {
-                const menuToggle = document.createElement('button');
-                menuToggle.className = 'menu-toggle';
-                menuToggle.innerHTML = '<i class="bi bi-list"></i>';
-                menuToggle.style.cssText = `
-                    background: none;
-                    border: none;
-                    font-size: 2rem;
-                    color: var(--primary-green);
-                    cursor: pointer;
-                    display: block;
-                `;
-                
-                header.querySelector('.container-fluid > .d-flex').insertBefore(
-                    menuToggle,
-                    mainNav
-                );
-                
-                menuToggle.addEventListener('click', function() {
-                    mainNav.style.display = mainNav.style.display === 'block' ? 'none' : 'block';
-                    mainNav.style.position = 'absolute';
-                    mainNav.style.top = '100%';
-                    mainNav.style.left = '0';
-                    mainNav.style.right = '0';
-                    mainNav.style.background = 'white';
-                    mainNav.style.padding = '1rem';
-                    mainNav.style.boxShadow = '0 4px 10px rgba(0,0,0,0.1)';
-                    
-                    const navList = mainNav.querySelector('.nav-list');
-                    navList.style.flexDirection = 'column';
-                    navList.style.gap = '0.5rem';
-                });
-            }
-        }
-    };
-    
-    createMobileMenu();
-    window.addEventListener('resize', createMobileMenu);
     /* ========================================
        ========== Start Loading Animation ==========
        ======================================== */
@@ -254,10 +265,12 @@
                 showNotification('جاري تسجيل الخروج...', 'info');
                 setTimeout(() => {
                     console.log('تم تسجيل الخروج');
+                    // window.location.href = '/logout';
                 }, 1500);
             }
         });
     }
+    
     /* ========================================
        ========== Start Dynamic Time Display ==========
        ======================================== */
@@ -278,6 +291,7 @@
     const scrollToTopBtn = document.createElement('button');
     scrollToTopBtn.innerHTML = '<i class="bi bi-arrow-up"></i>';
     scrollToTopBtn.className = 'scroll-to-top';
+    scrollToTopBtn.setAttribute('aria-label', 'العودة للأعلى');
     scrollToTopBtn.style.cssText = `
         position: fixed;
         bottom: 30px;
@@ -314,7 +328,18 @@
             behavior: 'smooth'
         });
     });
-      /*  ========== Start Add CSS Animations ==========*/
+    
+    scrollToTopBtn.addEventListener('mouseenter', function() {
+        this.style.transform = 'scale(1.1)';
+    });
+    
+    scrollToTopBtn.addEventListener('mouseleave', function() {
+        this.style.transform = 'scale(1)';
+    });
+    
+    /* ========================================
+       ========== Start Add CSS Animations ==========
+       ======================================== */
     
     const style = document.createElement('style');
     style.textContent = `
@@ -366,8 +391,41 @@
     `;
     document.head.appendChild(style);
     
-    // Log success message
-    console.log('✅ لوحة التحكم جاهزة ومفعلة بالكامل!');
+    /* ========================================
+       ========== Start Responsive Behavior ==========
+       ======================================== */
+    
+    // Handle window resize
+    let resizeTimer;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function() {
+            // Close sidebar if window is resized to desktop
+            if (window.innerWidth > 768) {
+                closeSidebar();
+            }
+        }, 250);
+    });
+    
+    // Touch swipe to close sidebar
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    sidebar.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+    }, false);
+    
+    sidebar.addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, false);
+    
+    function handleSwipe() {
+        // Swipe right to close (for RTL layout)
+        if (touchEndX > touchStartX + 50) {
+            closeSidebar();
+        }
+    }
     
 }); // End DOMContentLoaded
 
@@ -379,10 +437,7 @@
 // Service Worker for PWA (Progressive Web App)
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        // Uncomment to enable service worker
-        // navigator.serviceWorker.register('/sw.js')
-        //     .then(reg => console.log('Service Worker registered'))
-        //     .catch(err => console.log('Service Worker registration failed'));
+     
     });
 }
 

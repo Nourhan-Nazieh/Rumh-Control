@@ -17,6 +17,8 @@
     --border-color: #dfe6e9;
     --shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     --shadow-hover: 0 4px 20px rgba(0, 0, 0, 0.1);
+    --sidebar-width: 260px;
+    --header-height: 70px;
 }
 
 /* ========== Body Styles ========== */
@@ -41,7 +43,51 @@ body {
     left: 0;
     right: 0;
     z-index: 999;
-    margin-right: 260px;
+    height: var(--header-height);
+    transition: all 0.3s ease;
+}
+
+/* Desktop only: Add margin for sidebar */
+@media (min-width: 769px) {
+    .header-top {
+        margin-right: var(--sidebar-width);
+    }
+}
+
+.header-top .container-fluid {
+    height: 100%;
+}
+
+.header-top .d-flex {
+    height: 100%;
+}
+
+/* ========== Mobile Menu Toggle ========== */
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: var(--primary-green);
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: transform 0.3s ease;
+    z-index: 1001;
+}
+
+.mobile-menu-toggle:hover {
+    transform: scale(1.1);
+}
+
+.mobile-menu-toggle:active {
+    transform: scale(0.95);
+}
+
+/* Show on mobile and tablet */
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: block;
+    }
 }
 
 /* ========== Logo Styles ========== */
@@ -52,9 +98,9 @@ body {
     justify-content: center; 
     text-align: center;
     margin-top: 20px; 
-  }
-  
-  .logo-circle {
+}
+
+.logo-circle {
     width: 50px;
     height: 50px;
     background: linear-gradient(135deg, var(--primary-green), var(--light-green));
@@ -67,30 +113,38 @@ body {
     font-weight: 700;
     box-shadow: 0 4px 10px rgba(90, 147, 103, 0.3);
     transition: transform 0.3s ease;
-  }
-  
-  .logo-circle:hover {
+}
+
+.logo-circle img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+.logo-circle:hover {
     transform: scale(1.05);
-  }
-  
-  .user-info {
+}
+
+.user-info {
     text-align: center;
     margin-top: 20px;
-  }
-  
-  .user-info .user-name {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 1rem;
+}
+
+.user-info .user-name {
     font-size: 16px;
     font-weight: 700;
-    color:#1e723e;
+    color: #1e723e;
     margin: 0;
-  }
-  
+}
+
 /* ========== Navigation Menu ========== */
 .main-nav {
     flex: 1;
     display: flex;
     justify-content: flex-start;
-    
 }
 
 .nav-list {
@@ -133,17 +187,18 @@ body {
     background-color: rgba(90, 147, 103, 0.1);
 }
 
+/* Hide main nav on mobile */
+@media (max-width: 768px) {
+    .main-nav {
+        display: none;
+    }
+}
+
 /* ========== Login Section ========== */
 .login-section {
     display: flex;
     align-items: center;
     gap: 1rem;
-}
-
-.welcome-text {
-    color: var(--text-gray);
-    font-size: 0.95rem;
-    font-weight: 500;
 }
 
 .login-link {
@@ -159,7 +214,7 @@ body {
 }
 
 .btn-login {
-  background: linear-gradient(to right, #b5d38f, #95cc87);
+    background: linear-gradient(to right, #b5d38f, #95cc87);
     color: white;
     border: none;
     padding: 0.7rem 1.5rem;
@@ -169,6 +224,7 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 2px 8px rgba(143, 184, 150, 0.3);
+    white-space: nowrap;
 }
 
 .btn-login:hover {
@@ -177,10 +233,16 @@ body {
     box-shadow: 0 4px 12px rgba(143, 184, 150, 0.4);
 }
 
-/* ========================================
-   ========== End Header Section ==========
-   ======================================== */
-
+@media (max-width: 576px) {
+    .login-link {
+        font-size: 0.8rem;
+    }
+    
+    .btn-login {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+    }
+}
 
 /* ========================================
    ========== Start Main Wrapper ==========
@@ -189,6 +251,7 @@ body {
 .main-wrapper {
     display: flex;
     min-height: 100vh;
+    padding-top: var(--header-height);
 }
 
 /* ========================================
@@ -196,7 +259,7 @@ body {
    ======================================== */
 
 .sidebar {
-    width: 260px;
+    width: var(--sidebar-width);
     background-color: var(--bg-white);
     padding: 1.5rem 0.8rem;
     box-shadow: var(--shadow);
@@ -207,22 +270,42 @@ body {
     right: 0;
     height: 100vh;
     overflow-y: auto;
-    z-index: 100;
+    z-index: 1000;
+    transition: transform 0.3s ease;
 }
 
-/* ========== User Info ========== */
-.user-info {
-    text-align: center;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid var(--border-color);
-    margin-bottom: 1rem;
+/* Sidebar Close Button (Hidden on Desktop) */
+.sidebar-close {
+    display: none;
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-gray);
+    cursor: pointer;
+    z-index: 1001;
+    transition: color 0.3s ease;
 }
 
-.user-name {
-    color: var(--text-dark);
-    font-weight: 600;
-    font-size: 0.95rem;
-    margin: 0;
+.sidebar-close:hover {
+    color: var(--primary-green);
+}
+
+/* Mobile and Tablet: Hide sidebar by default */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(100%);
+    }
+    
+    .sidebar.active {
+        transform: translateX(0);
+    }
+    
+    .sidebar-close {
+        display: block;
+    }
 }
 
 /* ========== Sidebar Navigation ========== */
@@ -306,10 +389,24 @@ body {
     background-color: rgba(231, 76, 60, 0.1);
 }
 
-/* ========================================
-   ========== End Sidebar Section ==========
-   ======================================== */
+/* ========== Sidebar Overlay (Mobile Only) ========== */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
 
+.sidebar-overlay.active {
+    display: block;
+    opacity: 1;
+}
 
 /* ========================================
    ========== Start Content Area ==========
@@ -319,17 +416,37 @@ body {
     flex: 1;
     padding: 2rem;
     overflow-y: auto;
-    margin-right: 260px;
-    margin-top: 90px;
+    transition: margin-right 0.3s ease;
+}
+
+/* Desktop: Add margin for sidebar */
+@media (min-width: 769px) {
+    .content-area {
+        margin-right: var(--sidebar-width);
+    }
+}
+
+/* Mobile and Tablet: No margin */
+@media (max-width: 768px) {
+    .content-area {
+        margin-right: 0;
+        padding: 1.5rem 1rem;
+    }
 }
 
 .section-title {
-    color:#4fa837;
+    color: #4fa837;
     font-weight: 700;
     font-size: 1.3rem;
     margin-bottom: 1.2rem;
     padding-right: 10px;
     text-align: right;
+}
+
+@media (max-width: 576px) {
+    .section-title {
+        font-size: 1.1rem;
+    }
 }
 
 /* ========================================
@@ -368,6 +485,7 @@ body {
     justify-content: center;
     color: white;
     font-size: 1.5rem;
+    flex-shrink: 0;
 }
 
 .stat-content {
@@ -390,10 +508,21 @@ body {
     margin: 0.4rem 0 0 0;
 }
 
-/* ========================================
-   ========== End Welcome Section ==========
-   ======================================== */
-
+@media (max-width: 576px) {
+    .stat-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
+    }
+    
+    .stat-number {
+        font-size: 1.5rem;
+    }
+    
+    .stat-label {
+        font-size: 0.85rem;
+    }
+}
 
 /* ========================================
    ========== Start Stores Section ==========
@@ -485,9 +614,29 @@ body {
     border-color: var(--primary-green);
     color: var(--bg-light);
     background: linear-gradient(to right, #365113, #95cc87);
-  }
+}
 
-
+@media (max-width: 768px) {
+    .store-card {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .store-info {
+        justify-content: space-between;
+    }
+    
+    .store-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+    
+    .btn-visit,
+    .btn-dashboard {
+        width: 100%;
+        justify-content: center;
+    }
+}
 
 /* ========================================
    ========== Start Orders Section ==========
@@ -497,7 +646,7 @@ body {
     margin-bottom: 3rem;
 }
 
-/* ========== Orders Table ========== */
+/* ========== Orders Table (Desktop) ========== */
 .table-responsive {
     background-color: var(--bg-white);
     border-radius: 12px;
@@ -509,6 +658,7 @@ body {
 .orders-table {
     width: 100%;
     border-collapse: collapse;
+    min-width: 700px;
 }
 
 .orders-table thead {
@@ -522,6 +672,7 @@ body {
     color: var(--primary-green);
     font-size: 0.9rem;
     border-bottom: 1.5px solid var(--border-color);
+    white-space: nowrap;
 }
 
 .orders-table td {
@@ -542,161 +693,40 @@ body {
     font-size: 0.95rem;
 }
 
-/* ========================================
-   ========== End Orders Section ==========
-   ======================================== */
+/* ========== Mobile Orders Cards ========== */
+.mobile-orders-cards {
+    display: none;
+}
 
+.empty-state-mobile {
+    background-color: var(--bg-white);
+    border-radius: 12px;
+    padding: 3rem 2rem;
+    box-shadow: var(--shadow);
+    text-align: center;
+}
 
-/* ========================================
-   ========== Start Responsive Design ==========
-   ======================================== */
+.empty-state-mobile i {
+    font-size: 3rem;
+    color: var(--text-light);
+    margin-bottom: 1rem;
+}
 
-/* ========== Tablets (max-width: 992px) ========== */
-@media (max-width: 992px) {
-    .header-top {
-        padding: 1rem;
-    }
-    
-    .main-nav {
+.empty-state-mobile p {
+    color: var(--text-light);
+    font-size: 1rem;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .desktop-table {
         display: none;
     }
     
-    .sidebar {
-        width: 220px;
-    }
-    
-    .content-area {
-        padding: 1.5rem;
-    }
-    
-    .nav-list {
-        gap: 1rem;
-    }
-    
-    .stat-card {
-        padding: 1.5rem;
+    .mobile-orders-cards {
+        display: block;
     }
 }
-
-/* ========== Mobile (max-width: 768px) ========== */
-@media (max-width: 768px) {
-    .header-top {
-        margin-right: 0;
-    }
-    
-    .header-top .d-flex {
-        flex-wrap: wrap;
-        gap: 1rem;
-    }
-    
-    .main-wrapper {
-        flex-direction: column;
-    }
-    
-    .sidebar {
-        width: 100%;
-        position: relative;
-        top: 0;
-        height: auto;
-        border-radius: 0;
-    }
-    
-    .content-area {
-        padding: 1rem;
-        margin-right: 0;
-        margin-top: 0;
-    }
-    
-    .login-section {
-        order: -1;
-        width: 100%;
-        justify-content: space-between;
-    }
-    
-    .welcome-text {
-        font-size: 0.85rem;
-    }
-    
-    .btn-login {
-        padding: 0.6rem 1.5rem;
-        font-size: 0.9rem;
-    }
-    
-    .section-title {
-        font-size: 1.4rem;
-    }
-    
-    .stat-card {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .stat-content {
-        text-align: center;
-    }
-    
-    .store-card {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .store-info {
-        flex-direction: column;
-    }
-    
-    .store-actions {
-        width: 100%;
-        flex-direction: column;
-    }
-    
-    .btn-visit,
-    .btn-dashboard {
-        width: 100%;
-        justify-content: center;
-    }
-    
-    .orders-table {
-        font-size: 0.85rem;
-    }
-    
-    .orders-table th,
-    .orders-table td {
-        padding: 0.8rem;
-    }
-}
-
-/* ========== Small Mobile (max-width: 576px) ========== */
-@media (max-width: 576px) {
-    .logo-circle {
-        width: 50px;
-        height: 50px;
-        font-size: 1rem;
-    }
-    
-    .nav-list {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-    
-    .stat-icon {
-        width: 60px;
-        height: 60px;
-        font-size: 1.5rem;
-    }
-    
-    .stat-number {
-        font-size: 2rem;
-    }
-    
-    .stat-label {
-        font-size: 1rem;
-    }
-}
-
-/* ========================================
-   ========== End Responsive Design ==========
-   ======================================== */
-
 
 /* ========================================
    ========== Start Animations ==========
@@ -715,14 +745,10 @@ body {
 
 .stat-card,
 .store-card,
-.table-responsive {
+.table-responsive,
+.mobile-orders-cards {
     animation: fadeIn 0.6s ease-out;
 }
-
-/* ========================================
-   ========== End Animations ==========
-   ======================================== */
-
 
 /* ========================================
    ========== Start Utilities ==========
@@ -751,7 +777,12 @@ html {
     background: var(--dark-green);
 }
 
-/* ========================================
-   ========== End Utilities ==========
-   ======================================== */
+/* ========== Prevent Horizontal Scroll ========== */
+body {
+    overflow-x: hidden;
+}
+
+.main-wrapper {
+    overflow-x: hidden;
+}
 
