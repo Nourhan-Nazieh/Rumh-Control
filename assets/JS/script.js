@@ -173,7 +173,6 @@ document.addEventListener('DOMContentLoaded', function() {
         dashboardButton.addEventListener('click', function() {
             // Simulate dashboard login
             console.log('سجل دخول لصفحة التحكم');
-            showNotification('جاري تسجيل الدخول...', 'info');
         });
     }
  
@@ -251,25 +250,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
   
-    /* ========================================
-       ========== Start Logout Confirmation ==========
-       ======================================== */
-    
-    const logoutLink = document.querySelector('.logout-link');
-    
-    if (logoutLink) {
-        logoutLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            const confirmed = confirm('هل أنت متأكد من تسجيل الخروج؟');
-            if (confirmed) {
-                showNotification('جاري تسجيل الخروج...', 'info');
-                setTimeout(() => {
-                    console.log('تم تسجيل الخروج');
-                    // window.location.href = '/logout';
-                }, 1500);
-            }
-        });
-    }
+ 
     
     /* ========================================
        ========== Start Dynamic Time Display ==========
@@ -428,16 +409,4 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
 }); // End DOMContentLoaded
-
-
-/* ========================================
-   ========== Start Service Worker (Optional) ==========
-   ======================================== */
-
-// Service Worker for PWA (Progressive Web App)
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-     
-    });
-}
 
